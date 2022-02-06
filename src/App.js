@@ -9,6 +9,7 @@ const App = () => {
       <main className='main'>
         <Meme />
       </main>
+
     </div>
   );
 };
