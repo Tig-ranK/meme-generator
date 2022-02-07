@@ -1,7 +1,7 @@
 import React from 'react';
 import trollface from '../images/trollface.svg';
 
-const Header = () => {
+export default function Header () {
   return (
     <header className='header'>
       <img className='header-icon' src={trollface} alt='trollface' />
@@ -11,4 +11,3 @@ const Header = () => {
   );
 };
 
-export default Header;
