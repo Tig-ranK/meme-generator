@@ -1,0 +1,29 @@
+.header {
+  height: 65px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, #672280 1.18%, #a626d3 100%);
+  color: #fff;
+  > img {
+    margin-right: 7px;
+    height: 100%;
+  }
+}
+
+.header-logo_text {
+  font-family: Karla, sans-serif;
+  font-weight: bold;
+  font-size: 1.25rem;
+  line-height: 24px;
+  letter-spacing: -0.1em;
+  margin-right: auto;
+}
+
+.header-title {
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  margin-right: 15px;
+}
