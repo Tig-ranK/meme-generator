@@ -9,18 +9,21 @@ export default function Meme() {
   });
   const [allMemes, setAllMemes] = useState('');
 
+  // fetching the array of memes
   useEffect(() => {
     fetch('https://api.imgflip.com/get_memes')
       .then((res) => res.json())
       .then((data) => setAllMemes(data.data.memes));
   }, []);
 
-  function getMemeImage() {
+  // picking a random meme out of state
+  function getMeme() {
     const rand = Math.floor(Math.random() * allMemes.length);
     const url = allMemes[rand].url;
     setMeme((prevMeme) => ({ ...prevMeme, imageUrl: url }));
   }
 
+  // handle change of the inputs' text
   function handleChange(event) {
     const { name, value } = event.target;
     setMeme((prevMeme) => ({
@@ -48,12 +51,14 @@ export default function Meme() {
             onChange={handleChange}
           />
         </div>
-        <button className='form-button' onClick={getMemeImage}>
+
+        <button className='form-button' onClick={getMeme}>
           Get a new meme image 🖼️
         </button>
+
         <img className='meme-image' src={meme.imageUrl} alt='meme' />
-        {/* <a className='form-download' download="download.png" href={meme.imageUrl}>Download</a> */}
       </div>
+
       <button
         className='form-button'
         onClick={() => saveAs(meme.imageUrl, 'meme.png')}
