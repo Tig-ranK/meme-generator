@@ -5,24 +5,30 @@ import { fabric } from 'fabric';
 
 export default function App() {
   const [canvas, setCanvas] = useState('');
-
+  const [rect, setRect] = useState(
+    new fabric.Rect({
+      height: 100,
+      width: 100,
+      fill: `#ff7f00`
+    })
+  );
+  
   useEffect(() => {
-    setCanvas(initCanvas());
+    setCanvas(
+      () => 
+        new fabric.Canvas('canvas', {
+          width: 500,
+          height: 500,
+          backgroundColor: 'lightblue',
+        })
+    );
   }, []);
 
-  const initCanvas = () =>
-    new fabric.Canvas('canvas', {
-      width: 500,
-      height: 500,
-      backgroundColor: 'purple',
-    });
+  useEffect(() => {
+    console.log('rect changed');
+  }, [rect.getScaledWidth]);
 
   const addRect = (canvi) => {
-    const rect = new fabric.Rect({
-      height: 200,
-      width: 200,
-      fill: 'yellow',
-    });
     canvi.add(rect);
     canvi.renderAll();
   };
@@ -37,6 +43,7 @@ export default function App() {
       }
     );
   };
+
   return (
     <div className='container'>
       <Header />
