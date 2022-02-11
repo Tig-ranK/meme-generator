@@ -9,6 +9,9 @@ body {
 
 canvas {
   width: 100%;
+  border-radius: 3px;
+  border: 1px solid #535353;
+  cursor: unset !important;
 }
 .container {
   width: 60%;
