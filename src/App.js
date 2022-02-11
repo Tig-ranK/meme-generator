@@ -4,18 +4,19 @@ import Meme from './components/Meme';
 import { fabric } from 'fabric';
 
 export default function App() {
+  // states
   const [canvas, setCanvas] = useState('');
   const [rect, setRect] = useState(
     new fabric.Rect({
       height: 100,
       width: 100,
-      fill: `#ff7f00`
+      fill: `#ff7f00`,
     })
   );
-  
+  // initiating the canvas
   useEffect(() => {
     setCanvas(
-      () => 
+      () =>
         new fabric.Canvas('canvas', {
           width: 500,
           height: 500,
@@ -23,7 +24,7 @@ export default function App() {
         })
     );
   }, []);
-
+  // failed attempt at resize observer
   useEffect(() => {
     console.log('rect changed');
   }, [rect.getScaledWidth]);
@@ -38,12 +39,20 @@ export default function App() {
       'https://assets-global.website-files.com/6005fac27a49a9cd477afb63/6057684e5923ad2ae43c8150_bavassano_homepage_before.jpg',
       (img) => {
         img.scale(0.1);
-        canvas.add(img);
-        canvas.renderAll();
+        canvi.add(img);
+        canvi.renderAll();
       }
     );
   };
 
+  const addText = canvi => {
+    const text = new fabric.Text("text", {
+      top: 100,
+      left: 100
+    })
+    canvi.add(text)
+    canvi.renderAll()
+  }
   return (
     <div className='container'>
       <Header />
@@ -51,6 +60,7 @@ export default function App() {
         {/* <Meme /> */}
         <button onClick={() => addRect(canvas)}>Rectangle</button>
         <button onClick={() => addImage(canvas)}>Image</button>
+        <button onClick={() => addText(canvas)}>Text</button>
         <canvas id='canvas'></canvas>
       </main>
     </div>
