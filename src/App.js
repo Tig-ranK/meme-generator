@@ -18,8 +18,8 @@ export default function App() {
     setCanvas(
       () =>
         new fabric.Canvas('canvas', {
-          width: 500,
           height: 500,
+          width: 500,
           backgroundColor: 'lightblue',
         })
     );
@@ -46,9 +46,16 @@ export default function App() {
   };
 
   const addText = canvi => {
-    const text = new fabric.Text("text", {
+    const text = new fabric.IText("shut up".toUpperCase(), {
       top: 100,
-      left: 100
+      left: 100,
+      fill: '#fff',
+      stroke: '#000',
+      strokeWidth: 0.7,
+      fontStyle: 'bold',
+      fontFamily: 'Impact',
+      fontSize: 32,
+      lineHeight: 39,      
     })
     canvi.add(text)
     canvi.renderAll()
