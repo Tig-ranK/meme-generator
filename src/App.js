@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 // components
 import Header from './components/Header';
 import Meme from './components/Meme';

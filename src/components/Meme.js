@@ -4,14 +4,11 @@ import { fabric } from 'fabric';
 
 export default function Meme() {
   const defaultImage = 'http://i.imgflip.com/1bij.jpg';
-  const [meme, setMeme] = useState({
-    imageUrl: defaultImage,
-  });
+
   const [inputs, setInputs] = useState({
     text: 'Enter your text content',
     url: defaultImage,
   });
-  const [allMemes, setAllMemes] = useState('');
 
   const [mainWidth, mainHeight] = [
     0.7 * window.innerWidth,
@@ -35,7 +32,7 @@ export default function Meme() {
           preserveObjectStacking: true,
         })
     );
-  }, []);
+  }, [mainWidth, mainHeight]);
 
   const addImage = (canvi, url) => {
     fabric.Image.fromURL(
