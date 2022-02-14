@@ -7,68 +7,37 @@ export default function Meme() {
   const [meme, setMeme] = useState({
     imageUrl: defaultImage,
   });
+  const [inputs, setInputs] = useState({
+    text: 'Enter your text content',
+    url: defaultImage,
+  });
   const [allMemes, setAllMemes] = useState('');
-  const [currentImage, setCurrentImage] = useState(defaultImage);
-  const [mainWidth, mainHeight] = [500, 500];
+
+  const [mainWidth, mainHeight] = [
+    0.7 * window.innerWidth,
+    0.7 * window.innerHeight,
+  ];
+
   const [canvas, setCanvas] = useState(
     new fabric.Canvas('canvas', {
       width: mainWidth,
       height: mainHeight,
-      backgroundColor: 'lightblue',
       preserveObjectStacking: true,
     })
   );
   // initialize canvas
   useEffect(() => {
-    console.log('set the canvas');
     setCanvas(
       () =>
         new fabric.Canvas('canvas', {
           width: mainWidth,
           height: mainHeight,
-          backgroundColor: 'lightblue',
           preserveObjectStacking: true,
         })
     );
   }, []);
 
-  // useEffect(() => {
-  //   window.addEventListener('resize', function fitResponsiveCanvas() {
-  //     // canvas dimensions
-  //     let canvasSize = {
-  //       width: 1200,
-  //       height: 700,
-  //     };
-  //     // canvas container dimensions
-  //     let containerSize = {
-  //       width: document.getElementById('canvas-container').offsetWidth,
-  //       height: document.getElementById('canvas-container').offsetHeight,
-  //     };
-  //     canvas.setDimensions(containerSize);
-  //     // how you want to handle your zoom is really application dependant.
-  //     let scaleRatio = Math.min(
-  //       containerSize.width / canvasSize.width,
-  //       containerSize.height / canvasSize.height
-  //     );
-  //     canvas.setZoom(scaleRatio);
-  //   });
-  // }, []);
-
-  // fetching the array of memes
-  useEffect(() => {
-    fetch('https://api.imgflip.com/get_memes')
-      .then((res) => res.json())
-      .then((data) => setAllMemes(data.data.memes));
-  }, []);
-
-  // picking a random meme out of state
-  function getMeme() {
-    const rand = Math.floor(Math.random() * allMemes.length);
-    const url = allMemes[rand].url;
-    setMeme({ imageUrl: url });
-  }
-
-  const addBackgroundImage = (canvi, url) => {
+  const addImage = (canvi, url) => {
     fabric.Image.fromURL(
       url,
       function (img) {
@@ -85,8 +54,8 @@ export default function Meme() {
     );
   };
 
-  const addText = (canvi) => {
-    const text = new fabric.IText('shut up'.toUpperCase(), {
+  const addText = (canvi, textContent) => {
+    const text = new fabric.IText(textContent.toUpperCase(), {
       top: 100,
       left: 100,
       fill: '#fff',
@@ -113,20 +82,38 @@ export default function Meme() {
     canvas.remove(canvas.getActiveObject());
   };
 
+  const handleChange = (event) => {
+    setInputs((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+  };
   return (
-    <main>
-      <div className='form'>
-        <button className='form-button' onClick={getMeme}>
-          Get a new meme image 🖼️
-        </button>
-      </div>
-
-      <button onClick={() => addBackgroundImage(canvas, meme.imageUrl)}>
-        Background
+    <main className='main form-grid'>
+      <input
+        type='text'
+        name='text'
+        value={inputs.text}
+        onChange={handleChange}
+      />
+      <button
+        className='input-button'
+        onClick={() => addText(canvas, inputs.text)}
+      >
+        Text
       </button>
-      <button onClick={() => addText(canvas)}>Text</button>
+      <input
+        type='text'
+        name='url'
+        value={inputs.url}
+        onChange={handleChange}
+      />
+      <button
+        className='input-button'
+        onClick={() => addImage(canvas, inputs.url)}
+      >
+        Image
+      </button>
 
       <canvas id='canvas' className='canvas'></canvas>
+
       <div className='button-container'>
         <button className='form-button' onClick={removeObject}>
           Remove

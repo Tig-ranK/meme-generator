@@ -6,7 +6,6 @@ export default function Header () {
     <header className='header'>
       <img className='header-icon' src={trollface} alt='trollface' />
       <h2 className='header-logo_text'>Meme Generator</h2>
-      <p className='header-title'>React Course - Project 3</p>
     </header>
   );
 };

@@ -24,14 +24,10 @@ body {
 
 /* Form */
 
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
 
-.form-inputs {
-  display: flex;
+.form-grid {
+  display: grid;
+  grid-template-columns: auto max-content;
   gap: 15px;
   > input {
     font-family: Karla, sans-serif;
@@ -42,15 +38,6 @@ body {
     height: 2rem;
     border: 1px solid #d5d4d8;
     border-radius: 5px;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .form-inputs {
-    flex-direction: column;
-    > input {
-      height: 30px;
-    }
   }
 }
 
@@ -68,13 +55,13 @@ body {
 }
 
 .button-container {
+  grid-column: 1/-1;
   display: flex;
   flex-direction: row;
   gap: 1.25rem;
   > button {
     flex: 1;
   }
-  padding: 15px 0;
 }
 // Meme 
 
@@ -94,6 +81,7 @@ body {
   // height: 100% !important;
 }
 .canvas-container {
+  grid-column: 1/-1;
   width: 100% !important;
   // height: 0 !important;
 }
